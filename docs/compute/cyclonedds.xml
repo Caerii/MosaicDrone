@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CycloneDDS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/eclipse-cyclonedds/cyclonedds/master/etc/cyclonedds.xsd">
+  <Domain id="any">
+    <General>
+      <AllowMulticast>spdp</AllowMulticast>
+      <MaxMessageSize>65536</MaxMessageSize>
+    </General>
+    <Tracing>
+      <Verbosity>warning</Verbosity>
+    </Tracing>
+    <Discovery>
+      <Peers>
+        <Peer address="auto"/>
+      </Peers>
+    </Discovery>
+    <Transport>
+      <Builtin>
+        <UDP>
+          <RecvBufferSize>4194304</RecvBufferSize>
+          <SendBufferSize>4194304</SendBufferSize>
+        </UDP>
+      </Builtin>
+    </Transport>
+    <Profiles>
+      <Profile name="Profile.ControlLowLatency">
+        <Reliability>reliable</Reliability>
+        <History>keep_last</History>
+        <HistoryDepth>5</HistoryDepth>
+        <Deadline>20ms</Deadline>
+        <Liveliness>automatic</Liveliness>
+        <LivelinessLeaseDuration>200ms</LivelinessLeaseDuration>
+      </Profile>
+      <Profile name="Profile.Telemetry">
+        <Reliability>best_effort</Reliability>
+        <History>keep_last</History>
+        <HistoryDepth>50</HistoryDepth>
+        <Deadline>500ms</Deadline>
+      </Profile>
+      <Profile name="Profile.StateLatched">
+        <Reliability>reliable</Reliability>
+        <Durability>transient_local</Durability>
+        <History>keep_last</History>
+        <HistoryDepth>1</HistoryDepth>
+      </Profile>
+      <Profile name="Profile.Vision">
+        <Reliability>best_effort</Reliability>
+        <History>keep_last</History>
+        <HistoryDepth>10</HistoryDepth>
+      </Profile>
+    </Profiles>
+  </Domain>
+</CycloneDDS>
+
