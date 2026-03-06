@@ -201,63 +201,38 @@ Power options
 
 —
 
-## Repository layout (proposed)
+## Repository layout
+
+*Current structure (docs, specs, and design assets in place; `core/`, `modules/`, `swarm/`, `firmware/` are planned).*
 
 ```text
 MosaicDrone/
-├── core/
-│   ├── momav_base/            # Geometry, actuation, math models
-│   ├── controller/            # SQP allocator, mixers, limits, safety
-│   └── communication/         # ROS 2 msgs, transport, time sync
-├── modules/
-│   ├── connector/             # Docking hardware + firmware
-│   ├── propulsion/            # Motors, ESC profiles, blades
-│   ├── sensors/               # VIO/UWB/RTK integration
-│   └── payloads/              # Lights, displays, grippers
-├── swarm/
-│   ├── formation/             # Lattice planners, behaviors
-│   ├── logistics/             # Recharge scheduling, health
-│   └── interaction/           # Gestures, AR overlays
+├── cells/                     # Toolheads, mobile cells, recipes
+├── docs/                      # All technical docs — start at docs/README.md
+│   ├── README.md              # Doc index and folder layout
+│   ├── subsystems/INDEX.md    # Subsystem status and gaps
+│   └── ...                    # Specs by area (airframe, control, docking, etc.)
+├── economics/                 # Unit models, market analysis, validation
 ├── hardware/
-│   ├── CAD/                   # Frames, docks, jigs (STEP/STL)
-│   ├── PCB/                   # Power/data backplanes
+│   ├── CAD/                   # Frames, docks, jigs (STEP/STL, parametric)
 │   └── BOM/                   # Bills of materials
-├── simulations/
-│   ├── gazebo/                # ROS 2 sim world, dock models
-│   ├── mujoco/                # Dynamics + control testing
-│   └── unity/                 # AR/gesture prototyping
-├── docs/
-│   ├── architecture_overview.md
-│   ├── swarm_behavior_guide.md
-│   └── safety_and_ethics.md
-├── firmware/                  # MCU code (Zephyr/FreeRTOS)
+├── lca/                       # Life-cycle and sustainability model
+├── process/                   # Manufacturing and process docs
+├── simulations/               # Isaac Lab, training, environments
 ├── LICENSE
 └── README.md
 ```
 
-## Documentation and specs
+## Documentation
 
-- Subsystems status and gaps: [docs/subsystems/INDEX.md](docs/subsystems/INDEX.md)
+All technical specs and subsystem docs live in **docs/**. Use it as the single entry point.
 
-- Proposals and research
-  - [Recyclofacturing Proposal](Recyclofacturing-Proposal.md)
-  - [Landfill Mining README](README.landfill-mining.md)
-  - [Landfill Mining Thesis](THESIS.landfill-mining.md)
-
-- Core specs
-  - Docking: [docs/docking/interface.md](docs/docking/interface.md)
-  - Airframe: [docs/airframe/rotating_arm.md](docs/airframe/rotating_arm.md), [docs/airframe/propulsion.md](docs/airframe/propulsion.md)
-  - Power: [docs/power/battery_module.md](docs/power/battery_module.md), [docs/power/bus_and_sharing.md](docs/power/bus_and_sharing.md)
-  - Compute/Networking: [docs/compute/platform.md](docs/compute/platform.md), [docs/compute/networking.md](docs/compute/networking.md), [docs/compute/ros2_conventions.md](docs/compute/ros2_conventions.md)
-  - Perception: [docs/perception/localization.md](docs/perception/localization.md), [docs/perception/docking.md](docs/perception/docking.md)
-  - Control: [docs/control/sqp_allocator.md](docs/control/sqp_allocator.md), [docs/control/outer_loops.md](docs/control/outer_loops.md)
-  - Swarm: [docs/swarm/behaviors.md](docs/swarm/behaviors.md), [docs/swarm/scheduler.md](docs/swarm/scheduler.md), [docs/swarm/telemetry.md](docs/swarm/telemetry.md)
-  - Safety: [docs/safety/safety_case.md](docs/safety/safety_case.md), [docs/safety/ops.md](docs/safety/ops.md)
-  - Acoustics: [docs/acoustics/noise_package.md](docs/acoustics/noise_package.md)
-  - Simulation: [simulations/README.md](simulations/README.md)
-  - Manufacturing: [hardware/CAD/README.md](hardware/CAD/README.md), [hardware/BOM/README.md](hardware/BOM/README.md), [process/README.md](process/README.md)
-  - Cells: [cells/toolheads.md](cells/toolheads.md), [cells/mobile_cells.md](cells/mobile_cells.md), [cells/recipes/README.md](cells/recipes/README.md)
-  - Data/LCA/Economics: [docs/data/schemas.md](docs/data/schemas.md), [docs/data/retention.md](docs/data/retention.md), [lca/model.md](lca/model.md), [economics/unit_model.md](economics/unit_model.md)
+| Where to go | Link |
+|-------------|------|
+| **Documentation index** (specs, layout, links) | [docs/README.md](docs/README.md) |
+| **Subsystems status** (have / missing / next per subsystem) | [docs/subsystems/INDEX.md](docs/subsystems/INDEX.md) |
+| **Safety & operations** | [docs/safety/safety_case.md](docs/safety/safety_case.md), [docs/safety/ops.md](docs/safety/ops.md) |
+| **Proposals & research** (root) | [Recyclofacturing](Recyclofacturing-Proposal.md), [Landfill](README.landfill-mining.md), [Thesis](THESIS.landfill-mining.md), [Roadmap](STRATEGIC_UPGRADE_ROADMAP.md) |
 
 —
 
@@ -271,7 +246,7 @@ Prerequisites
 Build
 ```bash
 # WIP scaffolding (example commands)
-git clone https://github.com/yourname/MosaicDrone
+git clone https://github.com/Caerii/MosaicDrone
 cd MosaicDrone && colcon build
 source install/setup.bash
 ```
@@ -307,7 +282,7 @@ We welcome contributions across hardware, control, perception, UX, and ethics:
 - Add simulations and tests for new behaviors and allocators
 - Discuss safety, airspace, and community impact in `docs/`
 
-Please see `docs/architecture_overview.md` and `docs/safety_and_ethics.md` before proposing flight‑critical changes.
+Before proposing flight‑critical changes, see [Subsystems index](docs/subsystems/INDEX.md) and [Safety](docs/safety/safety_case.md) / [Operations](docs/safety/ops.md).
 
 —
 
