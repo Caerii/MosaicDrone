@@ -1,17 +1,15 @@
 # Docking and Interconnect
 
 ## Have
-- Conceptual docking state machine and roles
-- Notes on mechanical latch, pogo power, and data via pins
+- [Docking interface spec](../docking/interface.md): mechanical (alignment, latch, envelope), electrical (pinout, inrush, ORing, TVS, EMI), data (CAN/Ethernet options, CRC, retries, bandwidth budget), state machine with thresholds, timeouts, recovery, fault codes, tests, related docs
+- Conceptual docking state machine and roles; perception and safety cross-links
 
 ## Missing
-- Mechanical interface spec: alignment cones, latch forces, misalignment tolerance, wear, life cycles
-- Electrical interface spec: pinout, ratings, inrush/soft-start, ORing, reverse protection, EMI filters
-- Data interface spec: PHY/protocol (CAN or Ethernet), CRC and retries, auto-discovery, bandwidth budget
-- Full state machine with thresholds, timeouts, recovery, and fault codes
-- Test jigs and acceptance tests
+- Test jigs and acceptance test procedures (traceable to interface spec)
+- CAD: latch and pogo pad layouts in `hardware/CAD/docking/`
+- ROS 2 (or equivalent) `msgs/docking/*` for state/telemetry/fault codes and unit tests
 
 ## Next
-- Draft `docs/docking/interface.md` with mechanical, power, data sections
-- Prototype latch and pogo pad layouts in `hardware/CAD/`
-- Define `msgs/docking/*.msg` for state/telemetry and write unit tests
+- Prototype latch and pogo pad layouts in `hardware/CAD/docking/`
+- Define `msgs/docking/*.msg` (or equivalent) for state, telemetry, fault codes; add unit tests
+- Add acceptance test checklist derived from [interface.md](../docking/interface.md#tests)
